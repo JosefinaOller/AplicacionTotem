@@ -10,20 +10,19 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-import modelo.totem;
+import modelo.Totem;
 import vista.Vista;
 
 public class Controlador implements ActionListener {
 	
 	private Vista vistaTotem;
-	private totem modelo;
-	
+	private Totem modelo;
 	
 	public Controlador () {
 		this.vistaTotem = new Vista();
+		vistaTotem.setVisible(true);
 		vistaTotem.setActionlistener(this);
-		this.modelo= new totem();
-		
+		this.modelo= new Totem(Integer.parseInt(JOptionPane.showInputDialog("Escribe el número de totem")));
 	}
 	
 	@Override
@@ -34,8 +33,8 @@ public class Controlador implements ActionListener {
 			if(modelo.isValid(documento)) {
 				
 				try {
-					Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(),1236); //puerto 1236 es para el totem
-					PrintWriter out = new PrintWriter(socket.getOutputStream(), true); //inicia el flujo para enviar los mensajes
+					Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(),modelo.getPuerto()); 
+					PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
 	
 					out.println(documento); 
 			        out.close();
@@ -58,6 +57,8 @@ public class Controlador implements ActionListener {
 			}
 		}
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		Controlador c= new Controlador();
