@@ -25,7 +25,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Vista extends JFrame implements KeyListener {
+public class VistaTotem extends JFrame implements KeyListener {
 
 	private JPanel contentPane;
 	public JTextField textDocumento;
@@ -37,7 +37,7 @@ public class Vista extends JFrame implements KeyListener {
 	/**
 	 * Create the frame.
 	 */
-	public Vista() {
+	public VistaTotem() {
 		setBackground(new Color(224, 255, 255));
 		setTitle("T\u00D3TEM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
