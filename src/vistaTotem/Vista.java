@@ -1,4 +1,4 @@
-package vista;
+package vistaTotem;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
