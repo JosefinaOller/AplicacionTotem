@@ -5,10 +5,12 @@ package modeloTotem;
 public class Totem {
 	
 	private int puerto;
+	private int num;
 	
-	public Totem(int puerto) {
+	public Totem(int numTotem) {
 		super();
-		this.setPuerto(puerto);
+		this.puerto= numTotem + 1240;
+		this.num=numTotem;
 	}
 
 
@@ -35,8 +37,23 @@ public class Totem {
 
 
 	public void setPuerto(int puerto) {
-		this.puerto = puerto + 1240;
+		this.puerto = puerto;
 	}
+
+
+
+
+	public int getNum() {
+		return num;
+	}
+
+
+
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
 	
 	
 }

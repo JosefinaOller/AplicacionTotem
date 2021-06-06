@@ -8,13 +8,17 @@ import java.net.Socket;
 import controladorTotem.ControladorTotem;
 
 public class ErroresTotem {
-	ControladorTotem controladorTotem= new ControladorTotem();
+	
+	
+	private ControladorTotem controladorTotem;
+	private int puerto;
 	
 	
 	
 	public ErroresTotem(ControladorTotem controladorTotem) {
 		super();
 		this.controladorTotem = controladorTotem;
+		this.setPuerto(controladorTotem.modelo.getNum());
 		recibirError();
 	}
 
@@ -22,7 +26,7 @@ public class ErroresTotem {
 		new Thread() {
             public void run() {
                 try {
-                    ServerSocket server = new ServerSocket(2060); //serverSocket de totem desde el monitor
+                    ServerSocket server = new ServerSocket(getPuerto()); //serverSocket de totem desde el monitor
                     while (true) {
 
                         Socket socket= server.accept();
@@ -50,5 +54,22 @@ public class ErroresTotem {
 		this.controladorTotem.cambiarServidor();
 		
 	}
+
+	public ControladorTotem getControladorTotem() {
+		return controladorTotem;
+	}
+
+	public void setControladorTotem(ControladorTotem controladorTotem) {
+		this.controladorTotem = controladorTotem;
+	}
+
+	public int getPuerto() {
+		return puerto;
+	}
+
+	public void setPuerto(int puerto) {
+		this.puerto = puerto + 2060;
+	}
+	
 
 }

@@ -7,16 +7,19 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import modeloTotem.Totem;
+
 import vistaTotem.VistaTotem;
 
 public class ControladorTotem implements ActionListener {
 	
 	private VistaTotem vistaTotem;
-	private Totem modelo;
+	public Totem modelo;
+	private int cambio=0; 
 	
 	public ControladorTotem () {
 		this.vistaTotem = new VistaTotem();
@@ -33,9 +36,8 @@ public class ControladorTotem implements ActionListener {
 			if(modelo.isValid(documento)) {
 				try {
 					Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(),modelo.getPuerto()); 
-					PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
-		
-					out.println(documento); 
+					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+					out.println(documento);
 			        out.close();
 			        socket.close();
 			        
@@ -61,9 +63,15 @@ public class ControladorTotem implements ActionListener {
 	
 	
 	public void cambiarServidor() {
-		this.modelo.setPuerto(modelo.getPuerto()+200);
+		if(cambio==0) { //cambiare el puerto una sola vez 
+			System.out.println("Totem cambiando de puerto...");
+			this.modelo.setPuerto(modelo.getPuerto()+200);
+			System.out.println(modelo.getPuerto());
+			cambio=1;
+		}
+		
 		
 	}
-	
 
+	
 }
